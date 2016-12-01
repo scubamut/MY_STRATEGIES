@@ -1,13 +1,16 @@
 import pandas as pd
 from .endpoints import endpoints
 from .backtest import backtest
+from .get_yahoo_data import get_yahoo_data
 
 def compute_weights_RS_DM(name, parameters):
-    print(name)
+
+    print('Strategy : {}'.format(name))
 
     symbols = parameters['symbols']
     cash_proxy = parameters['cash_proxy']
     risk_free = parameters['risk_free']
+    prices = parameters['prices']
 
     rs_lookback = parameters['rs_lookback']
     risk_lookback = parameters['risk_lookback']
@@ -15,25 +18,16 @@ def compute_weights_RS_DM(name, parameters):
 
     frequency = parameters['frequency']
 
-    # get data
-    tickers = symbols.copy()
-    if cash_proxy != 'CASHX':
-        tickers = list(set(tickers + [cash_proxy]))
-    if isinstance(risk_free, str):
-        tickers = list(set(tickers + [risk_free]))
+    if prices == 'yahoo':
+        tickers = symbols.copy()
+        if cash_proxy != 'CASHX':
+            tickers = list(set(tickers + [cash_proxy]))
+        if isinstance(risk_free, str):
+            tickers = list(set(tickers + [risk_free]))
 
-    data = pd.DataFrame(columns=tickers)
-    for symbol in tickers:
-        print(symbol)
-        url = 'http://chart.finance.yahoo.com/table.csv?s=' + symbol + '&ignore=.csv'
-        data[symbol] = pd.read_csv(url, parse_dates=True, index_col='Date').sort_index(ascending=True)['Adj Close']
+        data = get_yahoo_data(tickers)
 
-    inception_dates = pd.DataFrame([data[ticker].first_valid_index() for ticker in data.columns],
-                                   index=data.keys(), columns=['inception'])
-
-    #     print (inception_dates)
-
-    prices = data.copy().dropna()
+        prices = data.copy().dropna()
 
     end_points = endpoints(period=frequency, trading_days=prices.index)
     prices_m = prices.loc[end_points]
@@ -71,4 +65,5 @@ def compute_weights_RS_DM(name, parameters):
 
     p_value.plot(figsize=(15, 10), grid=True, legend=True, label=name)
 
-    return p_value, p_holdings, p_weights
+    return p_value, p_holdings, p_weights, prices
+
