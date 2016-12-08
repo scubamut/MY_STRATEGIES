@@ -1,3 +1,5 @@
+# http://seekingalpha.com/article/4026626-defensive-etf-bond-strategy-application?source=all_articles_title
+
 import ffn
 import os
 
@@ -8,8 +10,8 @@ os.getcwd()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 strategies = {
-    'RS0001': {'symbols': ['HYS', 'MBB', 'HYMB'], 'prices': 'yahoo',
-               'rs_lookback': 3, 'risk_lookback': 3, 'n_top': 1, 'frequency': 'm',
+    'DM0004': {'symbols': ['HYS', 'MBB', 'HYMB'], 'prices': 'yahoo',
+               'rs_lookback': 3, 'risk_lookback': 3, 'n_top': 1, 'frequency': 'M',
                'cash_proxy': 'CASHX', 'risk_free': 0}}
 
 for name in strategies:
