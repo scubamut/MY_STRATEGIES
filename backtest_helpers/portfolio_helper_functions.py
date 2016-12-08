@@ -62,8 +62,7 @@ def compute_efficient_portfolio(mu_vec, sigma_mat, target_return, shorts=True):
     #
     # mu_p                   portfolio expected return
     # sig_p                  portfolio standard deviation
-    # weights                N x 1 DataFrame vector of portfolio weights
-    #                        with index = asset names
+    # weights    Ü            with index = asset names
 
     # check for valid inputs
     #

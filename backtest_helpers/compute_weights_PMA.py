@@ -16,9 +16,10 @@ def compute_weights_PMA(name, parameters):
     frequency = parameters['frequency']
 
     tickers = list(set(symbols + [cash_proxy]))
-    if prices == 'yahoo':
-        data = get_yahoo_data(tickers)
-        prices = data.copy().dropna()
+    if isinstance(prices, str):
+        if prices == 'yahoo':
+            data = get_yahoo_data(tickers)
+            prices = data.copy().dropna()
 
     end_points = endpoints(period=frequency, trading_days=prices.index)
     prices_m = prices.loc[end_points]
@@ -37,6 +38,6 @@ def compute_weights_PMA(name, parameters):
     # backtest
     p_value, p_holdings, p_weights = backtest(prices, weights, 10000., offset=0, commission=10.)
 
-    p_value.plot(figsize=(15, 10), grid=True, legend=True, label=name)
+    # p_value.plot(figsize=(15, 10), grid=True, legend=True, label=name)
 
     return p_value, p_holdings, p_weights, prices

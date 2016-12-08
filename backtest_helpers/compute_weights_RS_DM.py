@@ -18,22 +18,22 @@ def compute_weights_RS_DM(name, parameters):
 
     frequency = parameters['frequency']
 
-    if prices == 'yahoo':
-        tickers = symbols.copy()
-        if cash_proxy != 'CASHX':
-            tickers = list(set(tickers + [cash_proxy]))
-        if isinstance(risk_free, str):
-            tickers = list(set(tickers + [risk_free]))
+    if isinstance(prices, str):
+        if prices == 'yahoo':
+            tickers = symbols.copy()
+            if cash_proxy != 'CASHX':
+                tickers = list(set(tickers + [cash_proxy]))
+            if isinstance(risk_free, str):
+                tickers = list(set(tickers + [risk_free]))
 
-        data = get_yahoo_data(tickers)
+            data = get_yahoo_data(tickers)
 
-        prices = data.copy().dropna()
+            prices = data.copy().dropna()
 
     end_points = endpoints(period=frequency, trading_days=prices.index)
     prices_m = prices.loc[end_points]
 
     returns = prices_m[symbols].pct_change(rs_lookback)[rs_lookback:]
-    absolute_momentum_rule = returns > 0
 
     if isinstance(risk_free, int):
         excess_returns = returns
@@ -41,6 +41,8 @@ def compute_weights_RS_DM(name, parameters):
         risk_free_returns = prices_m[risk_free].pct_change(rs_lookback)[rs_lookback:]
         excess_returns = returns.subtract(risk_free_returns, axis=0).dropna()
 
+    absolute_momentum = prices_m[symbols].pct_change(risk_lookback)[risk_lookback:]
+    absolute_momentum_rule = absolute_momentum > 0
     rebalance_dates = excess_returns.index.join(absolute_momentum_rule.index, how='inner')
 
     # relative strength ranking
@@ -63,7 +65,7 @@ def compute_weights_RS_DM(name, parameters):
 
     p_value, p_holdings, p_weights = backtest(prices, weights, 10000., offset=0, commission=10.)
 
-    p_value.plot(figsize=(15, 10), grid=True, legend=True, label=name)
+    # p_value.plot(figsize=(15, 10), grid=True, legend=True, label=name)
 
     return p_value, p_holdings, p_weights, prices
 
