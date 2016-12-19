@@ -8,7 +8,6 @@ import numpy as np
 class CLA:
     def __init__(self,mean,covar,lB,uB):
         # Initialize the class
-        if (mean==np.ones(mean.shape)*mean.mean()).all():mean[-1,0]+=1e-5
         self.mean=mean
         self.covar=covar
         self.lB=lB
@@ -19,6 +18,7 @@ class CLA:
         self.f=[] # free weights
 #---------------------------------------------------------------
     def solve(self):
+        tmp = 100.
         # Compute the turning points,free sets and weights
         f,w=self.initAlgo()
         self.w.append(np.copy(w)) # store solution
@@ -27,7 +27,7 @@ class CLA:
         self.f.append(f[:])
         while True:
             #1) case a): Bound one free weight
-            l_in=None
+            l_in=float('-Inf')
             if len(f)>1:
                 covarF,covarFB,meanF,wB=self.getMatrices(f)
                 covarF_inv=np.linalg.inv(covarF)
@@ -37,7 +37,7 @@ class CLA:
                     if l>l_in:l_in,i_in,bi_in=l,i,bi
                     j+=1
             #2) case b): Free one bounded weight
-            l_out=None
+            l_out=float('-Inf')
             if len(f)<self.mean.shape[0]:
                 b=self.getB(f)
                 for i in b:
@@ -45,8 +45,16 @@ class CLA:
                     covarF_inv=np.linalg.inv(covarF)
                     l,bi=self.computeLambda(covarF_inv,covarFB,meanF,wB,meanF.shape[0]-1, \
                         self.w[-1][i])
-                    if (self.l[-1]==None or l<self.l[-1]) and l>l_out:l_out,i_out=l,i
+                    if self.l == [None] :
+                        # print ('self.l is None\n')
+                        self.l = [float('-Inf')]
+                    # print (self.l[-1], l, l_out)
+                    if (self.l[-1]==float('-Inf') or l<self.l[-1]) and l>l_out:
+                        l_out,i_out=l,i
+                        # print ('\n***** 2a *****\n', l_in, i_out, '\n')
+            # print ('\n***** 2b *****\n', l_in, i_out, '\n')
             if (l_in==None or l_in<0) and (l_out==None or l_out<0):
+                #print ('\n***** 3 *****\n', l_in, l_out, '\n')
                 #3) compute minimum variance solution
                 self.l.append(0)
                 covarF,covarFB,meanF,wB=self.getMatrices(f)
@@ -54,32 +62,38 @@ class CLA:
                 meanF=np.zeros(meanF.shape)
             else:
                 #4) decide lambda
+
                 if l_in>l_out:
+                    # print ('\n***** 4a *****\n', l_in, l_out, '\n')
                     self.l.append(l_in)
                     f.remove(i_in)
                     w[i_in]=bi_in # set value at the correct boundary
                 else:
+                    # print ('\n***** 4b *****\n', l_in, l_out, '\n')
                     self.l.append(l_out)
                     f.append(i_out)
                 covarF,covarFB,meanF,wB=self.getMatrices(f)
                 covarF_inv=np.linalg.inv(covarF)
             #5) compute solution vector
+            # print ('\n***** 5 *****\n', l_in, l_out, '\n')
             wF,g=self.computeW(covarF_inv,covarFB,meanF,wB)
             for i in range(len(f)):w[f[i]]=wF[i]
             self.w.append(np.copy(w)) # store solution
             self.g.append(g)
             self.f.append(f[:])
-            if self.l[-1]==0:break
+            if np.abs(self.l[-1] - tmp)<0.00000000000000001:break
+            else:tmp = self.l[-1]
         #6) Purge turning points
         self.purgeNumErr(10e-10)
         self.purgeExcess()
+
 #---------------------------------------------------------------
     def initAlgo(self):
         # Initialize the algo
         #1) Form structured array
         a=np.zeros((self.mean.shape[0]),dtype=[('id',int),('mu',float)])
         b=[self.mean[i][0] for i in range(self.mean.shape[0])] # dump array into list
-        a[:]=zip(range(self.mean.shape[0]),b) # fill structured array
+        a[:]=list(zip(range(self.mean.shape[0]),b)) # fill structured array
         #2) Sort structured array
         b=np.sort(a,order='mu')
         #3) First free weight
@@ -156,12 +170,11 @@ class CLA:
 #---------------------------------------------------------------
     def reduceMatrix(self,matrix,listX,listY):
         # Reduce a matrix to the provided list of rows and columns
-        matrix = np.asarray(matrix)
         if len(listX)==0 or len(listY)==0:return
         matrix_=matrix[:,listY[0]:listY[0]+1]
         for i in listY[1:]:
             a=matrix[:,i:i+1]
-            matrix_=np.append(matrix_,a,1) # gets stuck
+            matrix_=np.append(matrix_,a,1)
         matrix__=matrix_[listX[0]:listX[0]+1,:]
         for i in listX[1:]:
             a=matrix_[i:i+1,:]
@@ -280,3 +293,5 @@ class CLA:
                 mu.append(np.dot(w.T,self.mean)[0,0])
                 sigma.append(np.dot(np.dot(w.T,self.covar),w)[0,0]**.5)
         return mu,sigma,weights
+#---------------------------------------------------------------
+#---------------------------------------------------------------
