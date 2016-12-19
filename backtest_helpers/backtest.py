@@ -26,9 +26,6 @@ def backtest(prices, weights, capital, offset=1, commission=0.):
             else:
                 portfolio_value = cash + (p_holdings.iloc[i - 1] * prices.loc[date]).sum() * new_weights
                 p_holdings.iloc[i] = (portfolio_value / prices.loc[date]).fillna(0)
-                # print ('{} BUY \n{}\n{}\n{}\n{}\n{}\nHOLDINGS\n{}\n'.format(date,cash,portfolio_value,p_holdings.iloc[i-1], prices.loc[date],new_weights,p_holdings.iloc[i]))
-                # cash = (portfolio_value - p_holdings.iloc[i] * prices.loc[date]).sum()
-                #                 print ('{}\nPORTFOLIO VALUE\n{}\nCASH = {}'.format(date, portfolio_value,cash))
         else:
             p_holdings.iloc[i] = p_holdings.iloc[i - 1]
             # print ('{} HOLDINGS UNCHANGED'.format(date))
