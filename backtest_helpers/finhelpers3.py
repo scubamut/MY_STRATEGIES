@@ -107,8 +107,8 @@ def print_stats(equity, risk_free=0) :
     print ('volatility    : ', compute_volatility(d_returns))
 
     #print ('exposure    : ', compute_exposure(models$equal_weight))
-    print ('VAR 5%       : ', compute_var(d_returns))
-    print ('CVAR 5%       : ', compute_cvar(d_returns))
+    print ('VAR 5%       : ', compute_var(d_returns[1:]))
+    print ('CVAR 5%       : ', compute_cvar(d_returns[1:]))
     print ('% POSITIVE MONTHS       : ', compute_percent_positive_months(equity))
 
 #from zipline.utils import tradingcalendar
