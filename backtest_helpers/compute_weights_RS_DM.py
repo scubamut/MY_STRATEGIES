@@ -3,7 +3,7 @@ from .Parameters import Parameters
 from .get_prices import get_prices
 from .endpoints import endpoints
 from .backtest import backtest
-from .get_yahoo_data import get_yahoo_data
+from .get_yahoo_data_old import get_yahoo_data
 
 def compute_weights_RS_DM(name, parameters):
 
