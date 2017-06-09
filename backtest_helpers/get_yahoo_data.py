@@ -37,41 +37,32 @@ def download_quote(symbol, date_from, date_to,events):
     while attempts < 5:
         crumble_str, cookie_str = get_crumble_and_cookie(symbol)
         link = quote_link.format(symbol, time_stamp_from, time_stamp_to, events,crumble_str)
-        #print link
         r = Request(link, headers={'Cookie': cookie_str})
 
         try:
             response = urlopen(r)
             text = response.read()
-            print ("{} downloaded".format(symbol))
             return text
         except URLError:
-            print ("{} failed at attempt # {}".format(symbol, attempts))
             attempts += 1
             time.sleep(2*attempts)
     return b
 
-def fetch_yahoo_data(symbol):
+def fetch_yahoo_data(symbol, from_date='1980-01-01', to_date=datetime.datetime.today(), event='history'):
     symbol_val = symbol
-    # assume thios is earliest from data
-    from_val = '1990-01-01'
-    now = datetime.datetime.today()
-    to_val = now.isoformat()[:10]
-    event_val = 'history'
-    print("downloading {}".format(symbol_val))
+    from_val = from_date
+    to_val = to_date.isoformat()[:10]
+    event_val = event
     text = download_quote(symbol_val, from_val, to_val, event_val)
     return pd.read_csv(StringIO(text.decode("utf-8")), index_col=['Date'], parse_dates=True).sort_index(ascending=True)['Adj Close']
 
-def get_yahoo_data(tickers):
+def get_yahoo_data(tickers, from_date='1990-01-01', to_date=datetime.datetime.today(), event='history' ):
 
     data = pd.DataFrame(columns=tickers)
     for symbol in tickers:
         print(symbol, )
-#        url = 'http://chart.finance.yahoo.com/table.csv?s=' + symbol + '&ignore=.csv'
-#        data[symbol] = pd.read_csv(url, parse_dates=True, index_col='Date').sort_index(ascending=True)['Adj Close']
         data[symbol] = fetch_yahoo_data(symbol)
-    inception_dates = pd.DataFrame([data[ticker].first_valid_index() for ticker in data.columns],
-                                   index=data.keys(), columns=['inception'])
-
-    #     print (inception_dates)
     return data
+
+# data = get_yahoo_data(['SPY','EEM'])
+# data = data
