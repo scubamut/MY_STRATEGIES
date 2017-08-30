@@ -1,0 +1,117 @@
+<application>
+  <component name="ProjectJdkTable">
+    <jdk version="2">
+      <name value="Python 3.5.1 (C:\Program Files\Python35\python.exe)" />
+      <type value="Python SDK" />
+      <version value="Python 3.5.1" />
+      <homePath value="C:\Program Files\Python35\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root type="simple" url="file://C:/Program Files/Python35/DLLs" />
+            <root type="simple" url="file://C:/Program Files/Python35/Lib" />
+            <root type="simple" url="file://C:/Program Files/Python35" />
+            <root type="simple" url="file://C:/Program Files/Python35/Lib/site-packages" />
+            <root type="simple" url="file://$USER_HOME$/.PyCharmCE2016.3/system/python_stubs/-1249248731" />
+            <root type="simple" url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+    <jdk version="2">
+      <name value="Python 3.4.5 (E:\Anaconda3\python.exe)" />
+      <type value="Python SDK" />
+      <version value="Python 3.4.5" />
+      <homePath value="E:\Anaconda3\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root type="simple" url="file://E:/Anaconda3/DLLs" />
+            <root type="simple" url="file://E:/Anaconda3/Lib" />
+            <root type="simple" url="file://E:/Anaconda3" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/Sphinx-1.3.5-py3.4.egg" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/cachetools-1.1.6-py3.4.egg!/" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/plotly-1.6.14-py3.4.egg" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/ggplot-0.6.5-py3.4.egg" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/brewer2mpl-1.4.1-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/husl-4.0.1-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/prettyplotlib-0.1.7-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/matplotlylib-0.1.0-py3.4.egg!/" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/qgrid-0.1.1-py3.4.egg" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/PyBrain-0.3.3-py3.4.egg" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/l1-0.1-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/yahoo_finance-1.2.1-py3.4.egg!/" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/simplejson-3.8.2-py3.4-win-amd64.egg" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/alphalens-0.0.0-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/portfolioopt-1.0.0-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/empyrical-0.2.1-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/gspread-0.3.0-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/intervaltree-2.1.0-py3.4.egg!/" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/win32" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/win32/lib" />
+            <root type="simple" url="file://E:/Anaconda3/Lib/site-packages/pythonwin" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/setuptools-27.2.0-py3.4.egg!/" />
+            <root type="simple" url="jar://E:/Anaconda3/Lib/site-packages/sortedcontainers-1.4.4-py3.4.egg!/" />
+            <root type="simple" url="file://$USER_HOME$/.PyCharmCE2016.3/system/python_stubs/-791851423" />
+            <root type="simple" url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+    <jdk version="2">
+      <name value="Python 3.4.5 (E:\Anaconda3\envs\zipline\python.exe)" />
+      <type value="Python SDK" />
+      <version value="Python 3.4.5" />
+      <homePath value="E:\Anaconda3\envs\zipline\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root type="simple" url="file://E:/Anaconda3/envs/zipline/DLLs" />
+            <root type="simple" url="file://E:/Anaconda3/envs/zipline/Lib" />
+            <root type="simple" url="file://E:/Anaconda3/envs/zipline" />
+            <root type="simple" url="file://E:/Anaconda3/envs/zipline/Lib/site-packages" />
+            <root type="simple" url="jar://E:/Anaconda3/envs/zipline/Lib/site-packages/setuptools-27.2.0-py3.4.egg!/" />
+            <root type="simple" url="file://$USER_HOME$/.PyCharmCE2016.3/system/python_stubs/1793070722" />
+            <root type="simple" url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+    <jdk version="2">
+      <name value="Python 3.5.2 (E:\Anaconda3\envs\bt\python.exe)" />
+      <type value="Python SDK" />
+      <version value="Python 3.5.2" />
+      <homePath value="E:\Anaconda3\envs\bt\python.exe" />
+      <roots>
+        <classPath>
+          <root type="composite">
+            <root type="simple" url="file://E:/Anaconda3/envs/bt/DLLs" />
+            <root type="simple" url="file://E:/Anaconda3/envs/bt/Lib" />
+            <root type="simple" url="file://E:/Anaconda3/envs/bt" />
+            <root type="simple" url="file://E:/Anaconda3/envs/bt/Lib/site-packages" />
+            <root type="simple" url="jar://E:/Anaconda3/envs/bt/Lib/site-packages/setuptools-27.2.0-py3.5.egg!/" />
+            <root type="simple" url="file://$USER_HOME$/.PyCharmCE2016.3/system/python_stubs/-998753771" />
+            <root type="simple" url="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons" />
+          </root>
+        </classPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+  </component>
+</application>
