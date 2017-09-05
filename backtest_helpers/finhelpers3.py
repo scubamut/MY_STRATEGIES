@@ -510,10 +510,16 @@ def get_pricing(symbols, start_date='2013-01-03', end_date='2014-01-03', symbol_
     else :
         return data[fields]
 
-def highlight_pos_neg (s) :
-    is_positive = s > 0
+def highlight_pos_neg (strategy_value) :
+    is_positive = strategy_value > 0
     return ['background-color : rgb(127,255,0)' if v else 'background-color : rgb(255,99,71)' for v in is_positive]
 
 def show_return_table(strategy_value):
     df = monthly_return_table (strategy_value)
     return df.style.apply(highlight_pos_neg)
+
+def show_annual_returns(strategy_value) :
+    df = show_return_table(strategy_value)
+    frame = df['Annual Returns'].to_frame()
+    frame['positive'] = df['Annual Returns'] >= 0
+    frame['Annual Returns'].plot(figsize=(15, 10), kind='bar', color=frame.positive.map({True: 'g', False: 'r'}), grid=True)
