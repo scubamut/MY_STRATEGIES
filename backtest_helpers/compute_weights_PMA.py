@@ -1,6 +1,6 @@
 import pandas as pd
 from .Parameters import Parameters
-from .get_history_prices import get_history_prices
+from .get_yahoo_prices import get_yahoo_prices
 from .endpoints import endpoints
 from .backtest import backtest
 
