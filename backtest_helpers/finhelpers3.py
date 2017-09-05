@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 import datetime as dt
-#import pandas.io.data as web
 from pandas_datareader import data
 from math import sqrt
 import math
@@ -91,6 +90,7 @@ def compute_percent_positive_months(equity):
     return np.sum([1 if r > 0 else 0 for r in m_returns]) / len(m_returns) * 100
     
     m_rets = (1 + p_returns).resample('M').prod() - 1
+
 def print_stats(equity, risk_free=0) :
     print ('**** STATISTICS ****')
     print ('====================\n')
@@ -509,3 +509,11 @@ def get_pricing(symbols, start_date='2013-01-03', end_date='2014-01-03', symbol_
         return data
     else :
         return data[fields]
+
+def highlight_pos_neg (s) :
+    is_positive = s > 0
+    return ['background-color : rgb(127,255,0)' if v else 'background-color : rgb(255,99,71)' for v in is_positive]
+
+def show_return_table(strategy_value):
+    df = monthly_return_table (strategy_value)
+    return df.style.apply(highlight_pos_neg)
