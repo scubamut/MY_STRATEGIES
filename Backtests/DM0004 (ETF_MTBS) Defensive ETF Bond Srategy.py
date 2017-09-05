@@ -5,7 +5,7 @@ import os
 
 from backtest_helpers.compute_weights_RS_DM import compute_weights_RS_DM
 
-os.chdir('C:\\users\\scuba\\pycharmprojects\\simplebacktester')
+os.chdir('C:\\Users\\scuba\\Google Drive\\PycharmProjects\\SimpleBacktester')
 os.getcwd()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

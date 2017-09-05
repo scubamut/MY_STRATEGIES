@@ -10,7 +10,7 @@ from backtest_helpers.endpoints import endpoints
 from backtest_helpers.backtest import backtest
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-os.chdir('C:\\users\\scuba\\pycharmprojects\\simplebacktester')
+os.chdir('C:\\Users\\scuba\\Google Drive\\PycharmProjects\\SimpleBacktester')
 os.getcwd()
 
 

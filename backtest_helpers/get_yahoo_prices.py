@@ -1,4 +1,4 @@
-def get_history_prices(p):
+def get_yahoo_prices(p):
 
     from pandas_datareader import data
     from datetime import datetime

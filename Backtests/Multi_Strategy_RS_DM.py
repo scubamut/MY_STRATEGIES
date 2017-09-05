@@ -20,7 +20,7 @@ def side_by_side(*objs, **kwds):
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-os.chdir('C:\\users\\scuba\\pycharmprojects\\simplebacktester')
+os.chdir('C:\\Users\\scuba\\Google Drive\\PycharmProjects\\SimpleBacktester')
 os.getcwd()
 
 
@@ -104,9 +104,8 @@ ffn.calc_perf_stats(p_value).display()
 strategy_prices = strategy_values.dropna().copy()
 # need to add prices for cash_proxy and, if necessary, risk_free
 
-from backtest_helpers.get_yahoo_data import get_yahoo_data
-
-strategy_prices['FFXSX'] = get_yahoo_data(['FFXSX']).loc[index]
+from backtest_helpers.get_history_prices import get_history_prices
+strategy_prices['FFXSX'] = get_history_prices(['FFXSX']).loc[index]
 
 strategies1 = {
     'MUTLTI-RS': { 'symbols': list(strategies.keys()), 'prices': strategy_prices,

@@ -2,7 +2,8 @@
 import numpy as np
 import pandas as pd
 import datetime as dt
-import pandas.io.data as web
+#import pandas.io.data as web
+from pandas_datareader import data
 from math import sqrt
 import math
 
@@ -333,6 +334,8 @@ def ifna(x,y) :
     return(iif(math.isnan(x)(x) or math.isinf(x), y, x))
 
 def get_history(symbols, start, end, data_path, visible=False):
+
+    from pandas_datareader import data as y_data
     
     """ to get Yahoo data from saved csv files. If the file does not exist for the symbol, 
     data is read from Yahoo finance and the csv saved.
@@ -359,7 +362,7 @@ def get_history(symbols, start, end, data_path, visible=False):
             if visible:
             	print ('Refresh data.. ',)
             try:
-                new_data = web.get_data_yahoo(ticker, start, end)
+                new_data = y_data.get_data_yahoo(ticker, start, end)
 
                 if new_data.empty==False:
                     if data.empty==False:
@@ -482,7 +485,7 @@ def get_pricing(symbols, start_date='2013-01-03', end_date='2014-01-03', symbol_
     '''
     
     import os
-    os.chdir('E:\\NOTEBOOKS')
+    os.chdir('C:\\Users\\scuba\\Google Drive\\NOTEBOOKS')
     from finhelpers3 import get_history
     
     import datetime as dt

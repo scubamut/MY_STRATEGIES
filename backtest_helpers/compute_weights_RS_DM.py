@@ -1,9 +1,8 @@
 import pandas as pd
 from .Parameters import Parameters
-from .get_prices import get_prices
+from .get_history_prices import get_history_prices
 from .endpoints import endpoints
 from .backtest import backtest
-from .get_yahoo_data_old import get_yahoo_data
 
 def compute_weights_RS_DM(name, parameters):
 
@@ -11,7 +10,7 @@ def compute_weights_RS_DM(name, parameters):
 
     p = Parameters(parameters)
 
-    prices = get_prices(p)
+    prices = get_yahoo_prices(p)
 
     end_points = endpoints(period=p.frequency, trading_days=prices.index)
     prices_m = prices.loc[end_points]

@@ -3,7 +3,7 @@ import os
 
 from backtest_helpers.compute_weights_PMA import compute_weights_PMA
 
-os.chdir('C:\\users\\scuba\\pycharmprojects\\simplebacktester')
+os.chdir('C:\\Users\\scuba\\Google Drive\\PycharmProjects\\SimpleBacktester')
 os.getcwd()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
