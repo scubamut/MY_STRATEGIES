@@ -7,7 +7,8 @@ os.chdir('C:\\Users\\scuba\\Google Drive\\PycharmProjects\\SimpleBacktester')
 os.getcwd()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-strategies = {'PMA002': {'symbols': ['VCVSX', 'VWINX', 'VWEHX'], 'prices': 'yahoo',
+strategies = {'PMA002': {'symbols': ['VCVSX', 'VWINX', 'VWEHX'], 'prices': 'yahoo'
+               'start': '1986-01-01', 'end': 'today',
                'risk_lookback': 3, 'frequency': 'M', 'allocations': [0.6, 0.2, 0.2],
                'cash_proxy': 'VUSTX'}}
 

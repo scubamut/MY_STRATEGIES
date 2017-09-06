@@ -9,6 +9,7 @@ os.getcwd()
 
 strategies = {
     'DM0003': {'symbols': ['VCVSX','VGHCX', 'VWEHX','VFIIX','DRGIX','VWAHX'], 'prices': 'yahoo',
+               'start': '1986-01-01', 'end': 'today',
                'rs_lookback': 1, 'risk_lookback': 1, 'n_top': 2, 'frequency': 'M',
                'cash_proxy': 'VFIIX', 'risk_free': 0}}
 

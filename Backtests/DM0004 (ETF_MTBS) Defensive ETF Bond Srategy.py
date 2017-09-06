@@ -11,6 +11,7 @@ os.getcwd()
 
 strategies = {
     'DM0004': {'symbols': ['HYS', 'MBB', 'HYMB'], 'prices': 'yahoo',
+               'start': '1986-01-01', 'end': 'today',
                'rs_lookback': 3, 'risk_lookback': 3, 'n_top': 1, 'frequency': 'M',
                'cash_proxy': 'CASHX', 'risk_free': 0}}
 

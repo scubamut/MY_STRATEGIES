@@ -8,6 +8,7 @@ os.getcwd()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 strategies = {'PMA001':{'symbols': ['VCVSX', 'VFIIX'], 'prices': 'yahoo',
+                            'start': '1986-01-01', 'end': 'today',
                             'risk_lookback': 3, 'frequency': 'M', 'allocations': [0.6, 0.4],
                             'cash_proxy': 'VUSTX'}}
 
