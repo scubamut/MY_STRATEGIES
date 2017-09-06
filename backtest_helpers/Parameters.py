@@ -6,6 +6,10 @@ class Parameters():
             self.symbols = parameters['symbols']
         if 'prices' in parameters:
             self.prices = parameters['prices']
+        if 'start' in parameters:
+            self.start = parameters['start']
+        if 'end' in parameters:
+            self.end = parameters['end']
         if 'risk_free' in parameters:
             self.risk_free = parameters['risk_free']
         if 'cash_proxy' in parameters:

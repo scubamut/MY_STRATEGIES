@@ -1,3 +1,5 @@
+from .set_start_end import set_start_end
+
 def get_yahoo_prices(p):
 
     from pandas_datareader import data
@@ -15,8 +17,11 @@ def get_yahoo_prices(p):
             except:
                 pass
 
-            start = '2000-01-01'
-            end = datetime.today().strftime('%Y-%m-%d')
+            if p.start >= p.end:
+                raise ('start must be < end')
+
+            start, end = set_start_end()
+
             data_panel = data.DataReader(tickers, "yahoo", start, end)
 
             close = data_panel['Adj Close'].sort_index(ascending=True)
