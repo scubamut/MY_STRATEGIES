@@ -8621,6 +8621,7 @@
     </option>
     <option name="CONDA_CHANNELS">
       <set>
+        <option value="https://anaconda.org/conda-forge/repo" />
         <option value="https://github.com/quantopian/zipline" />
       </set>
     </option>
