@@ -1,5 +1,5 @@
 from six import viewkeys
-from zipline.api import (
+from my_zipline.api import (
     symbol, symbols,
     get_datetime,
     attach_pipeline,
@@ -9,18 +9,18 @@ from zipline.api import (
     schedule_function,
 )
 
-from zipline.utils.calendars import get_calendar
-from zipline.utils.run_algo import run_algorithm
-from zipline.utils.events import date_rules, time_rules
-from zipline.algorithm import TradingAlgorithm
-from zipline.data.data_portal import DataPortal
-from zipline.pipeline.loaders import USEquityPricingLoader
-from zipline.data.bundles.core import register, load
-from zipline.pipeline.engine import SimplePipelineEngine
-from zipline.pipeline import Pipeline
-from zipline.pipeline.data import USEquityPricing
-from zipline.pipeline.filters import StaticAssets
-from zipline.pipeline.factors import RSI, CustomFactor
+from my_zipline.utils.calendars import get_calendar
+from my_zipline.utils.run_algo import run_algorithm
+from my_zipline.utils.events import date_rules, time_rules
+from my_zipline.algorithm import TradingAlgorithm
+from my_zipline.data.data_portal import DataPortal
+from my_zipline.pipeline.loaders import USEquityPricingLoader
+from my_zipline.data.bundles.core import register, load
+from my_zipline.pipeline.engine import SimplePipelineEngine
+from my_zipline.pipeline import Pipeline
+from my_zipline.pipeline.data import USEquityPricing
+from my_zipline.pipeline.filters import StaticAssets
+from my_zipline.pipeline.factors import RSI, CustomFactor
 import os
 import pandas as pd
 import pandas_datareader as pdr

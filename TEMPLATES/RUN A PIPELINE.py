@@ -3,18 +3,18 @@ import pandas as pd
 from datetime import datetime
 import pytz
 
-from zipline.pipeline.data import Column
-from zipline.pipeline.data import DataSet
-from zipline.api import symbols
-from zipline.pipeline.loaders import USEquityPricingLoader
-from zipline.utils.calendars import get_calendar
-from zipline.data.bundles import register, load
-from zipline.pipeline import Pipeline
-from zipline.pipeline.data import USEquityPricing
-from zipline.pipeline.factors import Returns, AnnualizedVolatility
-from zipline.pipeline.filters import StaticAssets
-from zipline.pipeline.engine import SimplePipelineEngine
-from zipline.pipeline.loaders.frame import DataFrameLoader
+from my_zipline.pipeline.data import Column
+from my_zipline.pipeline.data import DataSet
+from my_zipline.api import symbols
+from my_zipline.pipeline.loaders import USEquityPricingLoader
+from my_zipline.utils.calendars import get_calendar
+from my_zipline.data.bundles import register, load
+from my_zipline.pipeline import Pipeline
+from my_zipline.pipeline.data import USEquityPricing
+from my_zipline.pipeline.factors import Returns, AnnualizedVolatility
+from my_zipline.pipeline.filters import StaticAssets
+from my_zipline.pipeline.engine import SimplePipelineEngine
+from my_zipline.pipeline.loaders.frame import DataFrameLoader
 from fintools.make_pipeline_engine import make_pipeline_engine
 
 

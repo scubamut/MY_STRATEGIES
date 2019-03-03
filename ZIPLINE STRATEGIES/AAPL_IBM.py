@@ -4,23 +4,23 @@
 A simple Pipeline algorithm that longs SPY and TLT each day.
 """
 from six import viewkeys
-from zipline.api import (
+from my_zipline.api import (
     attach_pipeline,
     order_target_percent,
     pipeline_output,
     record,
     schedule_function,
 )
-from zipline.utils.run_algo import run_algorithm
-from zipline.utils.events import date_rules, time_rules
-from zipline.utils.events import date_rules, time_rules
-from zipline.api import get_environment, symbol
-from zipline.pipeline import Pipeline
-from zipline.algorithm import TradingAlgorithm
-from zipline.api import order, record, symbol, order_target_percent, get_datetime, symbols
-from zipline.api import attach_pipeline, schedule_function
-from zipline.pipeline.data import USEquityPricing
-from zipline.pipeline.filters import StaticAssets
+from my_zipline.utils.run_algo import run_algorithm
+from my_zipline.utils.events import date_rules, time_rules
+from my_zipline.utils.events import date_rules, time_rules
+from my_zipline.api import get_environment, symbol
+from my_zipline.pipeline import Pipeline
+from my_zipline.algorithm import TradingAlgorithm
+from my_zipline.api import order, record, symbol, order_target_percent, get_datetime, symbols
+from my_zipline.api import attach_pipeline, schedule_function
+from my_zipline.pipeline.data import USEquityPricing
+from my_zipline.pipeline.filters import StaticAssets
 
 import os
 import pandas as pd

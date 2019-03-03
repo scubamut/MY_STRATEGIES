@@ -2,13 +2,13 @@
 This is a template algorithm on Zipline for you to adapt and fill in.
 """
 
-from zipline.api import attach_pipeline, pipeline_output, get_datetime
-from zipline import run_algorithm
-from zipline.api import symbols, get_datetime, schedule_function
-from zipline.utils.events import date_rules, time_rules
-from zipline.pipeline import Pipeline
-from zipline.pipeline.data import USEquityPricing
-from zipline.pipeline.filters import StaticAssets
+from my_zipline.api import attach_pipeline, pipeline_output, get_datetime
+from my_zipline import run_algorithm
+from my_zipline.api import symbols, get_datetime, schedule_function
+from my_zipline.utils.events import date_rules, time_rules
+from my_zipline.pipeline import Pipeline
+from my_zipline.pipeline.data import USEquityPricing
+from my_zipline.pipeline.filters import StaticAssets
 from datetime import datetime, timezone
 import pytz
 
