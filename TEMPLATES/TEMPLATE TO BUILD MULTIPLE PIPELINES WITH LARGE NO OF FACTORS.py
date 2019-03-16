@@ -1,18 +1,24 @@
 # https://www.quantopian.com/posts/alpha-combination-via-clustering
+# adapted for Zipline
 
 """
-This is a template algorithm on Quantopian for you to adapt and fill in.
+This is a template algorithm on Zipline for you to adapt and fill in.
 """
-import quantopian.algorithm as algo
-from quantopian.algorithm import attach_pipeline, pipeline_output
-from quantopian.pipeline import Pipeline
-from quantopian.pipeline.data.builtin import USEquityPricing
-from quantopian.pipeline.filters import QTradableStocksUS
-from quantopian.pipeline.factors import CustomFactor, Returns, DailyReturns
+
+from zipline.api import attach_pipeline, pipeline_output
+from zipline import run_algorithm
+from zipline.api import symbols, get_datetime, schedule_function
+from zipline.utils.events import date_rules, time_rules
+from zipline.pipeline import Pipeline
+from zipline.pipeline.data import USEquityPricing
+from zipline.pipeline.factors import CustomFactor, Returns, DailyReturns
+from zipline.pipeline.filters import StaticAssets
 import pandas as pd
 import numpy as np
 from scipy.stats.mstats import winsorize
 from sklearn import preprocessing
+from datetime import datetime
+import pytz
 
 WINDOW_LENGTH = 5
 WIN_LIMIT = 0
@@ -82,52 +88,58 @@ def initialize(context):
     Called once at the start of the algorithm.
     """
 
-    context.alphas = pd.DataFrame()
+    c = context
+
+    c.etf_universe = StaticAssets(symbols('XLY', 'XLP', 'XLE', 'XLF', 'XLV',
+                                          'XLI', 'XLB', 'XLK', 'XLU'))
+    c.alphas = pd.DataFrame()
 
     # Rebalance every day, 1 hour after market open.
-    algo.schedule_function(
+    schedule_function(
         rebalance,
-        algo.date_rules.every_day(),
-        algo.time_rules.market_open(hours=1),
+        date_rules.every_day(),
+        time_rules.market_open(hours=1),
     )
 
     # Record tracking variables at the end of each day.
-    algo.schedule_function(
+    schedule_function(
         record_vars,
-        algo.date_rules.every_day(),
-        algo.time_rules.market_close(),
+        date_rules.every_day(),
+        time_rules.market_close(),
     )
 
     # Create our dynamic stock selector.
-    attach_pipeline(make_pipeline(), 'pipeline')
-    attach_pipeline(make_pipeinit(), 'pipeinit')
+    attach_pipeline(make_pipeline(context), 'pipeline')
+    attach_pipeline(make_pipeinit(context), 'pipeinit')
 
-    context.first_trading_day = True
-    context.factor_name_list = make_factor().keys()
+    c.first_trading_day = True
+    c.factor_name_list = make_factor().keys()
 
 
-def make_pipeinit():
+def make_pipeinit(context):
+    universe = context.etf_universe
     factors = make_factor()
 
     pipeline_columns = {}
     for f in factors.keys():
         for days_ago in reversed(range(WINDOW_LENGTH)):
-            pipeline_columns[f + '-' + str(days_ago)] = Factor_N_Days_Ago([factors[f](mask=QTradableStocksUS())],
+            pipeline_columns[f + '-' + str(days_ago)] = Factor_N_Days_Ago([factors[f](mask=universe)],
                                                                           window_length=days_ago + 1,
-                                                                          mask=QTradableStocksUS())
+                                                                          mask=universe)
 
     pipe = Pipeline(columns=pipeline_columns,
-                    screen=QTradableStocksUS())
+                    screen=universe)
 
     return pipe
 
 
-def make_pipeline():
+def make_pipeline(context):
+    universe = context.etf_universe
     all_factors = make_factor()
     factors = {a: all_factors[a]() for a in all_factors}
     pipe = Pipeline(
         columns=factors,
-        screen=QTradableStocksUS()
+        screen=universe
     )
     return pipe
 
@@ -182,3 +194,17 @@ def handle_data(context, data):
     Called every minute.
     """
     pass
+
+
+if __name__ == "__main__":
+    start = datetime(2013, 1, 1, 0, 0, 0, 0, pytz.utc)
+    end = datetime(2013, 1, 10, 0, 0, 0, 0, pytz.utc)
+    #     end = datetime.today().replace(tzinfo=timezone.utc)
+    capital_base = 100000
+
+    result = run_algorithm(start=start, end=end, initialize=initialize, \
+                           capital_base=capital_base, \
+                           before_trading_start=before_trading_start,
+                           bundle='etfs_bundle')
+
+    print(result[-3:])

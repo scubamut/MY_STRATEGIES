@@ -1,41 +1,17 @@
-from six import viewkeys
-from my_zipline.api import (
-    symbol, symbols,
-    get_datetime,
-    attach_pipeline,
-    order, order_target_percent,
-    pipeline_output,
-    record,
-    schedule_function,
-)
 
-from my_zipline.utils.events import date_rules, time_rules
-from my_zipline.algorithm import TradingAlgorithm
-from my_zipline.pipeline.loaders import USEquityPricingLoader
-from my_zipline.data.bundles.core import load
-from my_zipline.pipeline.engine import SimplePipelineEngine
-from my_zipline.pipeline import Pipeline
-from my_zipline.pipeline.data import USEquityPricing
-from my_zipline.pipeline.filters import StaticAssets
-from my_zipline.pipeline.factors import RSI, Returns, AnnualizedVolatility
-import my_zipline
-import os
-import pandas as pd
-import pandas_datareader as pdr
-from datetime import datetime, timezone
+from zipline import run_algorithm
+from zipline.api import (symbols,attach_pipeline,pipeline_output,schedule_function)
+from zipline.utils.events import date_rules, time_rules
+from zipline.pipeline import Pipeline
+from zipline.pipeline.data import USEquityPricing
+from zipline.pipeline.filters import StaticAssets
+from zipline.pipeline.factors import Returns, AnnualizedVolatility
+from datetime import datetime
 import pytz
-import numpy as np
-import xarray as xr
-
-from fintools.get_DataArray import get_DataArray
-
-import matplotlib as plt
-# %matplotlib inline
 
 WEIGHT1 = WEIGHT2 = WEIGHT3 = WEIGHT4 = WEIGHT5 = 1.0
 
-
-def initialize(context, data):
+def initialize(context):
     context.universe = StaticAssets(symbols(
         'XLY',  # Select SPDR U.S. Consumer Discretionary
         'XLP',  # Select SPDR U.S. Consumer Staples
@@ -49,7 +25,7 @@ def initialize(context, data):
     ))
 
     #     my_pipe = Pipeline()
-    my_pipe = make_pipeline(context, data)
+    my_pipe = make_pipeline(context)
 
     # context.universe = StaticAssets(etfs)
     attach_pipeline(my_pipe, 'my_pipeline')
@@ -64,7 +40,7 @@ def handle_data(context, data):
     pass
 
 
-def make_pipeline(context, data):
+def make_pipeline(context):
     '''
     A function to create our dynamic stock selector (pipeline). Documentation on
     pipeline can be found here: https://www.quantopian.com/help#pipeline-title
@@ -98,9 +74,7 @@ def make_pipeline(context, data):
         'volume': volume,
     }
 
-    pipe = Pipeline()
-    pipe = Pipeline(columns=pipe_columns)
-    pipe.set_screen = universe
+    pipe = Pipeline(columns=pipe_columns,screen=universe)
 
     return pipe
 
@@ -115,3 +89,17 @@ def before_trading_start(context, data):
 
 def rebalance(context, data):
     pass
+
+
+if __name__ == "__main__":
+    start = datetime(2013, 1, 1, 0, 0, 0, 0, pytz.utc)
+    end = datetime(2013, 1, 10, 0, 0, 0, 0, pytz.utc)
+    #     end = datetime.today().replace(tzinfo=timezone.utc)
+    capital_base = 100000
+
+    result = run_algorithm(start=start, end=end, initialize=initialize, \
+                           capital_base=capital_base, \
+                           before_trading_start=before_trading_start,
+                           bundle='etfs_bundle')
+
+    print(result[:3])

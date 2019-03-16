@@ -9,7 +9,7 @@ from quantopian.pipeline.experimental import risk_loading_pipeline
 from quantopian.pipeline.filters import QTradableStocksUS
 from quantopian.pipeline.data.psychsignal import stocktwits
 from scipy.stats.mstats import winsorize
-from my_zipline.utils.numpy_utils import (
+from zipline.utils.numpy_utils import (
     repeat_first_axis,
     repeat_last_axis,
 )
